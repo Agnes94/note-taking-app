@@ -1,5 +1,15 @@
 import React, { FC } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
+
+interface ButtonProps {
+  children?:     any;
+  className?:    string;
+  disabled?:     boolean;
+  hide?:         boolean;
+  isLoading?:    boolean;
+  onClick?:      React.MouseEventHandler<HTMLButtonElement>;
+  open?:         boolean;
+};
 
 export const Button: FC<ButtonProps> = ({
   disabled     = false,
@@ -21,9 +31,6 @@ export const Button: FC<ButtonProps> = ({
 };
 
   const StyledButton = styled.button<ButtonProps>`
-    position:        fixed;
-    bottom:          0;
-    right:           0;
     justify-content: center;
     text-align:      center;
     align-items:     center;
@@ -52,17 +59,6 @@ export const Button: FC<ButtonProps> = ({
       transform: translateY(0.5px);
     }
   `;
-  
-  
-  type ButtonProps = {
-    children?:     any;
-    className?:    string;
-    disabled?:     boolean;
-    hide?:         boolean;
-    isLoading?:    boolean;
-    onClick?:      React.MouseEventHandler<HTMLButtonElement>;
-    open?:         boolean;
-  };
   
   const InnerContent = styled.div`
     display:         flex;

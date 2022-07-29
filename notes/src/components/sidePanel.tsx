@@ -1,8 +1,7 @@
-import React, { ReactNode, useRef } from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import { useClickOutside } from '../util';
 
-type SidePanelProps = {
+interface SidePanelProps {
   open?:                () => void;
   close?:               (open: boolean) => void;
   showSidePanel?:       boolean;
@@ -24,8 +23,8 @@ export const SidePanel = (props: SidePanelProps) => {
 
 
 const PanelContainer = styled.div<SidePanelProps>`
-  position:         absolute;
-  background-color: gray;
+  position:         fixed;
+  background-color: transparent;
   padding:          1rem 1rem;
   z-index:          10;
   opacity:          0.8;

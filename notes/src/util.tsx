@@ -28,3 +28,4 @@ export const useClickOutside = (ref: React.MutableRefObject<any>, handler: (arg0
     };
   }, [ref, handler]);
 };
+
