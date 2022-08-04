@@ -1,6 +1,9 @@
 import React from "react";
-  
-export const useClickOutside = (ref: React.MutableRefObject<any>, handler: (arg0: any) => void) => {
+
+export const useClickOutside = (
+  ref: React.MutableRefObject<any>,
+  handler: (arg0: any) => void
+) => {
   React.useEffect(() => {
     let startedInside = false;
     let startedWhenMounted = false;
@@ -29,3 +32,13 @@ export const useClickOutside = (ref: React.MutableRefObject<any>, handler: (arg0
   }, [ref, handler]);
 };
 
+export const debounce = (
+  clbk: (args?: any) => void,
+  debounceDelay: number = 250
+) => {
+  let debounceTimer: NodeJS.Timeout = null;
+  return (args?: any) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => clbk(args), debounceDelay);
+  };
+};
