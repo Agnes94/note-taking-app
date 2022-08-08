@@ -2,10 +2,10 @@ import React, { InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { SearchIcon } from "../assets/svg/searchIcon";
 
-const IconsContainer = styled.div`
+const IconContainer = styled.div`
   position: absolute;
   top: 0.8rem;
-  right: 0;
+  right: -3rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -23,9 +23,6 @@ const IconsContainer = styled.div`
 `;
 
 const InputField = styled.input<{ focused?: boolean }>`
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   display: block;
   font-size: 1.6rem;
   line-height: 2rem;
@@ -34,13 +31,13 @@ const InputField = styled.input<{ focused?: boolean }>`
   background-color: transparent;
   outline: none;
   padding: 1rem;
+  padding-right: 3rem;
   transition: all 0.3s ease;
-  border: 1px solid;
+  border: none;
   border-radius: 0.4rem;
-  border-color: gray;
 
   &:focus {
-    border-color: black;
+    border-color: 1px solid black;
     transition-delay: 0.1s;
   }
 `;
@@ -56,7 +53,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   onFocus?: (e: React.FocusEvent<HTMLDivElement>) => void;
 }
 
-export const Input: React.FC<InputProps> = ({
+export const SearchInput: React.FC<InputProps> = ({
   value = "",
   onChange = () => {},
   onFocus = () => {},
@@ -69,9 +66,9 @@ export const Input: React.FC<InputProps> = ({
           onChange={onChange}
           {...props}
         />
-        <IconsContainer>
-          <SearchIcon />
-        </IconsContainer>
+        <IconContainer>
+          <SearchIcon width='2.6rem' height='2.6rem'/>
+        </IconContainer>
     </InputGroup>
   );
 };

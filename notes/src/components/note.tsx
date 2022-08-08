@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { DeleteIcon } from "../assets/svg/deleteIcon";
+import { Button } from "./button";
 
 export interface INoteProps {
   title?: string;
@@ -16,16 +18,35 @@ export const Note = (props: INoteProps) => {
   return (
     <Container>
       <h1>{title}</h1>
-      <textarea
+      <StyledTextArea
         onChange={(event) => onChange(idx, event.target.value)}
         placeholder="Type here"
         value={text}
+        rows={6}
       />
-      <button onClick={() => remove(idx)}>delete note</button>
+      <Button variant='icon' onClick={() => remove(idx)}>
+        <DeleteIcon width='1.6rem' height='1.6rem'/>
+      </Button>
     </Container>
   );
 };
 
 const Container = styled.div`
-  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  :last-child {
+    margin-bottom: 1rem;
+  }
 `;
+
+const StyledTextArea = styled.textarea`
+  border: none;
+  resize: none;
+  padding: 1rem 1rem;
+  background: hsl(55 100% 90.9%);
+  border-radius: 1rem;
+  width: 30rem;
+  margin-bottom: 1rem;
+`
