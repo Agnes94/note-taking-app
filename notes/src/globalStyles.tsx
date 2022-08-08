@@ -68,8 +68,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   * {
-    /* font-family: 'Lato', arial !important; */
-    font-family: 'Open Sans', arial !important;
+  font-family: 'Inter', sans-serif;
   }
   strong {
     font-weight: 600;
