@@ -22,14 +22,13 @@ const IconContainer = styled.div`
   }
 `;
 
-const InputField = styled.input<{ focused?: boolean }>`
+const InputField = styled.input`
   display: block;
   font-size: 1.6rem;
   line-height: 2rem;
   width: 100%;
   color: black;
   background-color: transparent;
-  outline: none;
   padding: 1rem;
   padding-right: 3rem;
   transition: all 0.3s ease;
@@ -38,7 +37,7 @@ const InputField = styled.input<{ focused?: boolean }>`
 
   &:focus {
     border-color: 1px solid black;
-    transition-delay: 0.1s;
+    outline: 1px solid black;
   }
 `;
 

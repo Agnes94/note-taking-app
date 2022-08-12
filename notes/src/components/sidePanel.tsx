@@ -23,10 +23,8 @@ export const SidePanel = (props: SidePanelProps) => {
 
 const PanelContainer = styled.div<SidePanelProps>`
   position: fixed;
-  background-color: transparent;
   padding: 1rem 1rem;
   z-index: 10;
-  opacity: 0.8;
   top: 0;
   left: 0;
   height: 100vh;
