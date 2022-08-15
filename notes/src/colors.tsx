@@ -1,4 +1,3 @@
-
 export const colors = {
   slate1:  'hsl(206, 30.0%, 98.8%)',
   slate2:  'hsl(210, 16.7%, 97.6%)',

@@ -11,7 +11,6 @@ import { NoteIcon } from "./assets/svg/noteIcon";
 import { colors } from "./colors";
 
 const LOCAL_STORAGE_KEY = "react-notes-app-data";
-
 export interface INote {
   text: string;
   date: Date;
@@ -49,7 +48,6 @@ export const App = () => {
     },
     [notesList]
   );
-
 
   const updateNote = React.useCallback(
     (idx: number, text: string) => {
@@ -90,7 +88,7 @@ export const App = () => {
   return (
     <div ref={wrapperRef}>
       <GlobalStyle />
-      <SidePanel showSidePanel={showSidePanel}>
+      <SidePanel close={() => setShowSidePanel(false)} showSidePanel={showSidePanel}>
         <HeaderContainer>
           <SearchInput
             placeholder="Search notes"
@@ -109,7 +107,7 @@ export const App = () => {
                   onChange={updateNote}
                   remove={deleteNote}
                   idx={idx}
-                  date={note.date.toLocaleString()}
+                  created_at={note.date.toLocaleString()}
                   text={note.text}
                   key={idx}
                 />

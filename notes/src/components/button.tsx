@@ -13,7 +13,6 @@ interface ButtonProps {
 
 type ButtonVariant = "primary" | "icon";
 
-
 export const Button: FC<ButtonProps> = ({
   disabled = false,
   onClick,
@@ -53,46 +52,12 @@ const buttonStyles = {
 
   icon: css`
     background: transparent;
-    background-color: none;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
     padding: 0.8rem 0.8rem;
 
     :hover {
-      background-color: ${colors.slate5};
-      background-position: fixed;
-    }
-
-    :active {
-      transform: scale(0.92);
-    }
-
-    ::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 150%;
-      aspect-ratio: 1 / 1;
-      transform: translate(-50%, -50%) scale(0);
-      pointer-events: none;
-      border-radius: 99.9rem;
-      background: rgba(255, 255, 255, 0.5);
-    }
-
-    :focus::after {
-      animation: scale_up 1000ms forwards;
-    }
-
-    @keyframes scale_up {
-      0% {
-        transform: translate(-50%, -50%) scale(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0;
-      }
+      background-color: ${colors.slate4};
     }
   `,
 };
@@ -108,9 +73,9 @@ const StyledButton = styled.button<ButtonProps>`
   border: none;
   cursor: pointer;
   font-weight: 400;
-  color: hsl(155 24.0% 9.0%);
+  color: hsl(155 24% 9%);
   border-radius: 4px;
-  padding: 1rem 1rem;
+  padding: 1.2rem 1.2rem;
   min-width: fit-content;
   ${(props) =>
     props.variant ? buttonStyles[props.variant] : buttonStyles["primary"]};
@@ -130,7 +95,6 @@ const StyledButton = styled.button<ButtonProps>`
 const InnerContent = styled.div`
   display: flex;
   flex-direction: row;
-  position: relative;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;

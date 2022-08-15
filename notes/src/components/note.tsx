@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React from "react";
 import styled from "styled-components";
 import { DeleteIcon } from "../assets/svg/deleteIcon";
@@ -7,7 +8,7 @@ import { Button } from "./button";
 export interface INoteProps {
   title?: string;
   text: string;
-  date?: string;
+  created_at?: string;
   idx: number;
   remove: (idx: number) => void;
   onChange: (idx: number, text: string) => void;
@@ -16,7 +17,7 @@ export interface INoteProps {
 const MIN_TEXTAREA_HEIGHT = 32;
 
 export const Note = (props: INoteProps) => {
-  const { text, date, onChange, remove, idx } = props;
+  const { text, created_at, onChange, remove, idx } = props;
   const textareaRef = React.useRef(null);
 
   React.useLayoutEffect(() => {
@@ -31,10 +32,7 @@ export const Note = (props: INoteProps) => {
 
   return (
     <Container>
-      <TextareWrapper>
-        <DateContainer>
-          <Date>{date}</Date>
-        </DateContainer>
+      <TextareaWrapper>
         <StyledTextArea
           onChange={(event) => onChange(idx, event.target.value)}
           placeholder="Type here"
@@ -42,7 +40,8 @@ export const Note = (props: INoteProps) => {
           value={text}
           rows={4}
         />
-      </TextareWrapper>
+          <Date>{created_at}</Date>
+      </TextareaWrapper>
       <Button variant="icon" onClick={() => remove(idx)}>
         <DeleteIcon width="1.6rem" height="1.6rem" />
       </Button>
@@ -60,20 +59,15 @@ const Container = styled.div`
   }
 `;
 
-const DateContainer = styled.div`
-  padding-right: 0.5rem;
-  display: flex;
-  justify-content: flex-end;
-`;
-
 const Date = styled.p`
   align-self: flex-end;
+  position: absolute;
+  right: 6rem;
+  padding-bottom: 1.5rem;
 `;
 
-const TextareWrapper = styled.div`
-  display: "flex";
-  flex-direction: column;
-  align-items: flex-end;
+const TextareaWrapper = styled.div`
+  display: flex;
 `;
 
 const StyledTextArea = styled.textarea`
