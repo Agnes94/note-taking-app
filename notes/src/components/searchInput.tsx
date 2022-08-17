@@ -2,6 +2,32 @@ import React, { InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { SearchIcon } from "../assets/svg/searchIcon";
 
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  placeholder?: string;
+  onChange?: () => void;
+  onFocus?: (e: React.FocusEvent<HTMLDivElement>) => void;
+}
+
+export const SearchInput: React.FC<InputProps> = ({
+  value = "",
+  onChange = () => {},
+  onFocus = () => {},
+  ...props
+}) => {
+
+  return (
+    <InputGroup>
+        <InputField
+          onChange={onChange}
+          {...props}
+        />
+        <IconContainer>
+          <SearchIcon width='2.6rem' height='2.6rem'/>
+        </IconContainer>
+    </InputGroup>
+  );
+};
+
 const IconContainer = styled.div`
   position: absolute;
   top: 0.8rem;
@@ -45,29 +71,3 @@ const InputGroup = styled.div`
   position: relative;
   width: 20rem;
 `;
-
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  placeholder?: string;
-  onChange?: () => void;
-  onFocus?: (e: React.FocusEvent<HTMLDivElement>) => void;
-}
-
-export const SearchInput: React.FC<InputProps> = ({
-  value = "",
-  onChange = () => {},
-  onFocus = () => {},
-  ...props
-}) => {
-
-  return (
-    <InputGroup>
-        <InputField
-          onChange={onChange}
-          {...props}
-        />
-        <IconContainer>
-          <SearchIcon width='2.6rem' height='2.6rem'/>
-        </IconContainer>
-    </InputGroup>
-  );
-};

@@ -35,7 +35,7 @@ const PanelContainer = styled.div<SidePanelProps>`
   left: 0;
   height: 100vh;
   width: 36rem;
-  overflow: scroll;
+  overflow: auto;
   transform: ${(p) =>
     p.showSidePanel ? "translateX(0%)" : "translate(-100%)"};
   transition: all 0.4s;

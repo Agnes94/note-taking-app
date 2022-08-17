@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import React from "react";
 import styled from "styled-components";
 import { DeleteIcon } from "../assets/svg/deleteIcon";
@@ -18,12 +17,11 @@ const MIN_TEXTAREA_HEIGHT = 32;
 
 export const Note = (props: INoteProps) => {
   const { text, created_at, onChange, remove, idx } = props;
-  const textareaRef = React.useRef(null);
+  const textareaRef: React.MutableRefObject<HTMLTextAreaElement | null> = React.useRef<HTMLTextAreaElement | null>(null);
 
   React.useLayoutEffect(() => {
-    // Reset height - important to shrink on delete
+    if(!(textareaRef && textareaRef.current)) return;  
     textareaRef.current.style.height = "inherit";
-    // Set height
     textareaRef.current.style.height = `${Math.max(
       textareaRef.current.scrollHeight,
       MIN_TEXTAREA_HEIGHT
@@ -35,6 +33,10 @@ export const Note = (props: INoteProps) => {
       <TextareaWrapper>
         <StyledTextArea
           onChange={(event) => onChange(idx, event.target.value)}
+          style={{
+            minHeight: MIN_TEXTAREA_HEIGHT,
+            resize: "none"
+          }}
           placeholder="Type here"
           ref={textareaRef}
           value={text}

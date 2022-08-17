@@ -23,13 +23,10 @@ export const App = () => {
     { text: "", date: new Date()},
   ]);
 
-  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const wrapperRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef<HTMLDivElement | null>(null);
   useClickOutside(wrapperRef, () => setShowSidePanel(false));
   
-  const toggleSidePanel = React.useCallback(
-    () => setShowSidePanel(!showSidePanel),
-    [showSidePanel]
-  );
+  const toggleSidePanel = () => setShowSidePanel(!showSidePanel);
   
   const addNote = (): void => {
     const newNotesList = {
@@ -62,8 +59,11 @@ export const App = () => {
     const storage_string = sessionStorage.getItem(LOCAL_STORAGE_KEY);
     if (!storage_string) return;
     try {
-      const savedNotes = JSON.parse(storage_string);
-      if (savedNotes) setNotesList(savedNotes);
+      const savedNotes: {text: string, date: string}[] = JSON.parse(storage_string);
+      if (savedNotes) setNotesList(savedNotes.map((n: {text: string, date: string}) => ({
+        ...n,
+        date: n.date ? new Date(n.date) : new Date()
+      })));
     } catch (err) {
       console.log("error");
     }
@@ -81,8 +81,7 @@ export const App = () => {
   };
 
   const filteredNotes = getFilteredNotes(notesList, search);
-  const updateQuery = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setSearch(event.target.value);
+  const updateQuery = (event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.target.value);
   const handleSearch = debounce(updateQuery, 500);
 
   return (
@@ -100,31 +99,27 @@ export const App = () => {
           </Button>
         </HeaderContainer>
         {notesList.length > 0 &&
-          (filteredNotes && filteredNotes.length > 0 ? (
+          ((filteredNotes && filteredNotes.length > 0) ? (
             filteredNotes.map((note: INote, idx: number) => (
-              <>
-                <Note
-                  onChange={updateNote}
-                  remove={deleteNote}
-                  idx={idx}
-                  created_at={note.date.toLocaleString()}
-                  text={note.text}
-                  key={idx}
-                />
-              </>
+              <Note
+                onChange={updateNote}
+                remove={deleteNote}
+                idx={idx}
+                created_at={note.date.toLocaleString()}
+                text={note.text}
+                key={idx}
+              />
             ))
           ) : (
             <Text>No results found</Text>
           ))}
       </SidePanel>
-      {showSidePanel ? (
-        ""
-      ) : (
+      {!showSidePanel &&
         <ToggleButton variant="primary" onClick={toggleSidePanel}>
           <NoteIcon width="2rem" height="2rem" />
           Notes
         </ToggleButton>
-      )}
+      }
     </div>
   );
 };

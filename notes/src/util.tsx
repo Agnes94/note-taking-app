@@ -36,9 +36,9 @@ export const debounce = (
   clbk: (args?: any) => void,
   debounceDelay: number = 250
 ) => {
-  let debounceTimer: NodeJS.Timeout = null;
+  let debounceTimer: NodeJS.Timeout | null = null;
   return (args?: any) => {
-    clearTimeout(debounceTimer);
+    debounceTimer && clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => clbk(args), debounceDelay);
   };
 };
