@@ -11,9 +11,13 @@ It is a simple web app, that allows the user to add, edit, delete and also searc
 - TypeScript
 - HTML5
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+Install dependenices:
+
+### `npm install`
+
+In the project directory run:
 
 ### `npm start`
 
